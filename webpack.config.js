@@ -1,7 +1,7 @@
 module.exports = {
     devtool: 'source-map',
     entry: {
-        "app": "./app.jsx",
+        "app": "./src/app.jsx",
     },
     mode: "development",
     output: {
