@@ -32,6 +32,21 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="amplify\#current-cloud-backend\amplify-meta.json" />
+    <Content Include="amplify\#current-cloud-backend\auth\amplifydeploytest308d6c5b\amplifydeploytest308d6c5b-cloudformation-template.yml" />
+    <Content Include="amplify\#current-cloud-backend\auth\amplifydeploytest308d6c5b\parameters.json" />
+    <Content Include="amplify\#current-cloud-backend\backend-config.json" />
+    <Content Include="amplify\#current-cloud-backend\tags.json" />
+    <Content Include="amplify\.config\local-aws-info.json" />
+    <Content Include="amplify\.config\local-env-info.json" />
+    <Content Include="amplify\.config\project-config.json" />
+    <Content Include="amplify\backend\amplify-meta.json" />
+    <Content Include="amplify\backend\auth\amplifydeploytest308d6c5b\amplifydeploytest308d6c5b-cloudformation-template.yml" />
+    <Content Include="amplify\backend\auth\amplifydeploytest308d6c5b\parameters.json" />
+    <Content Include="amplify\backend\backend-config.json" />
+    <Content Include="amplify\backend\tags.json" />
+    <Content Include="amplify\cli.json" />
+    <Content Include="amplify\team-provider-info.json" />
     <Content Include="src\app.jsx">
       <SubType>Code</SubType>
     </Content>
@@ -53,6 +68,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="amplify\" />
+    <Folder Include="amplify\#current-cloud-backend\" />
+    <Folder Include="amplify\#current-cloud-backend\auth\" />
+    <Folder Include="amplify\#current-cloud-backend\auth\amplifydeploytest308d6c5b\" />
+    <Folder Include="amplify\.config\" />
+    <Folder Include="amplify\backend\" />
+    <Folder Include="amplify\backend\auth\" />
+    <Folder Include="amplify\backend\auth\amplifydeploytest308d6c5b\" />
     <Folder Include="src\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
