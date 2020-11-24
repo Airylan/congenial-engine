@@ -140,7 +140,7 @@ const App = (props) => {
             {user ? (
                 <button onClick={() => Auth.signOut()}>Sign Out</button>
             ) : (
-                    <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
+                    <button onClick={() => Auth.federatedSignIn({ provider: 'Google' })}>Sign in with Google</button>
                 )}
         </div>
     </>);
