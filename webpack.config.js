@@ -8,7 +8,11 @@ module.exports = {
         filename: "./[name]-bundle.js"
     },
     resolve: {
-        extensions: ['.Webpack.js', '.web.js', '.ts', '.js', '.jsx', '.tsx']
+        extensions: ['.Webpack.js', '.web.js', '.ts', '.js', '.jsx', '.tsx'],
+        fallback: {
+            "crypto": require.resolve("crypto-js"),
+            "stream": require.resolve("stream-browserify")
+        }
     },
     module: {
         rules: [
@@ -17,6 +21,12 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'ts-loader'
+                }
+            },
+            {
+                test: /\.mjs/,
+                resolve: {
+                    fullySpecified: false
                 }
             },
             {
