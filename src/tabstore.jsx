@@ -14,43 +14,25 @@ const saveCurrentTabIfDirty = () => ({ getState, setState }) => {
     });
 };
 
-const pullCurrentTab = () => ({ getState, setState }) => {
-    const state = getState();
-
-    Storage.get(`${state.currentTab}.md`, {
+const pullTab = (tab) => ({ getState, setState }) => {
+    Storage.get(`${tab}.md`, {
         level: 'private',
         contentType: 'text/plain',
         download: true,
         cacheControl: 'no-cache'
     }).then(mdfile => {
         mdfile.Body.text().then(md => {
-            const tab = getState().currentTab;
             setState({
-                tabs: state.tabs.map((t, index) => (index === tab) ? { ...t, value: md } : { ...t }),
-                isDirty: state.isDirty.map((v, index) => (index === tab) ? false : v)
+                tabs: getState().tabs.map((t, index) => (index === tab) ? { ...t, value: md } : { ...t }),
+                isDirty: getState().isDirty.map((v, index) => (index === tab) ? false : v)
             });
         })
     }).catch(e => console.error(e));
+}
 
-    /*
-    try {
-        const mdfile = await Storage.get(`${state.currentTab}.md`, {
-            level: 'private',
-            contentType: 'text/plain',
-            download: true
-        });
-
-        mdfile.Blob.text().then(md => {
-            const tab = getState().currentTab;
-            setState({
-                tabs: state.tabs.map((t, index) => (index === tab) ? { ...t, value: md } : { ...t }),
-                isDirty: state.isDirty.map((v, index) => (index === tab) ? false : v)
-            });
-        });
-    } catch (e) {
-        console.error(e);
-    }
-    */
+const pullCurrentTab = () => ({ getState, dispatch }) => {
+    const state = getState();
+    dispatch(pullTab(state.currentTab));
 }
 
 const Store = createStore({
@@ -69,7 +51,7 @@ const Store = createStore({
                 value: ""
             }
         ],
-        isDirty: [ false, false, false ],
+        isDirty: [false, false, false],
         currentTab: 0
     },
     actions: {
@@ -84,6 +66,11 @@ const Store = createStore({
             dispatch(saveCurrentTabIfDirty());
             setState({ currentTab: tab });
             dispatch(pullCurrentTab());
+        },
+        pullAllTabs: () => ({ getState, dispatch }) => {
+            const tabs = getState().tabs;
+            // there's probably a better way of doing this:
+            tabs.forEach((tab, index) => dispatch(pullTab(index)));
         }
     }
 });

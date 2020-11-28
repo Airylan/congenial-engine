@@ -74,7 +74,7 @@ const TabPanel = (props) => {
 }
 
 const App = (props) => {
-    const [state, { setCurrentTab, setMarkdown }] = useTabs();
+    const [state, { setCurrentTab, setMarkdown, pullAllTabs }] = useTabs();
     const [{ user }, { setUser, signIn, signOut, setCustomOAuthState }] = useUserInfo();
 
     useEffect(() => { document.title = "Testing React App" });
@@ -106,7 +106,7 @@ const App = (props) => {
             }
         });
 
-        getUser().then(userData => setUser(userData));
+        getUser().then(userData => { setUser(userData); pullAllTabs(); });
     }, []);
 
     return (<>
